@@ -26,7 +26,7 @@ public class SavingsAccount {
 
     public static void modifyInterestRate(double interestRate) {
         annualInterestRate = interestRate;
-        System.out.println("Annual Interest rate is modified in " +annualInterestRate);
+        System.out.println("Annual Interest rate is modified in " + annualInterestRate);
     }
 
     public double calculateMonthlyRate() {

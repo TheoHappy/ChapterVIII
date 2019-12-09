@@ -9,7 +9,6 @@ public class Time2Test
       Time2 t2 = new Time2(2); // 02:00:00
       Time2 t3 = new Time2(21, 34); // 21:34:00
 
-      System.out.println(t3.sinceMidnight());
 
       Time2 t4 = new Time2(12, 25, 42); // 12:25:42
       Time2 t5 = new Time2(t4); // 12:25:42

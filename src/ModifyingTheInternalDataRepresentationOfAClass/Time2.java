@@ -2,30 +2,23 @@ package ModifyingTheInternalDataRepresentationOfAClass;// Fig. 8.5: Time2.java
 // Time2 class declaration with overloaded constructors.  
 
 public class Time2 {
-    private int hour; // 0 - 23
-    private int minute; // 0 - 59
-    private int second; // 0 - 59
 
-    private int secondsSinceMidnight = hour * 3600 + minute * 60 + second;
-
-    public long sinceMidnight() {
-        return (hour * 3600 + minute * 60 + second);
-    }
+    private int secondsSinceMidnight;
 
     // Time2 no-argument constructor:
     // initializes each instance variable to zero
     public Time2() {
-        this(0, 0, 0); // invoke constructor with three arguments
+        this.secondsSinceMidnight = 0;
     }
 
     // Time2 constructor: hour supplied, minute and second defaulted to 0
     public Time2(int hour) {
-        this(hour, 0, 0); // invoke constructor with three arguments
+        this.secondsSinceMidnight = hour * 3600;
     }
 
     // Time2 constructor: hour and minute supplied, second defaulted to 0
     public Time2(int hour, int minute) {
-        this(hour, minute, 0); // invoke constructor with three arguments
+        this.secondsSinceMidnight = hour * 3600 + minute * 60;
     }
 
     // Time2 constructor: hour, minute and second supplied
@@ -39,9 +32,10 @@ public class Time2 {
         if (second < 0 || second >= 60)
             throw new IllegalArgumentException("second must be 0-59");
 
-        this.hour = hour;
-        this.minute = minute;
-        this.second = second;
+        this.secondsSinceMidnight = hour * 3600 + minute * 60 + second;
+
+
+
     }
 
     // Time2 constructor: another Time2 object supplied
@@ -52,9 +46,7 @@ public class Time2 {
 
     public void setTime(int hour, int minute, int second) {
 
-        this.hour = secondsSinceMidnight / 3600;
-        this.minute = secondsSinceMidnight % 3600 / 60;
-        this.second = secondsSinceMidnight % 3600 % 60;
+        this.secondsSinceMidnight = hour * 3600 + minute * 60 + second;
 
         if (secondsSinceMidnight > 86400)
             throw new IllegalArgumentException("Error");
@@ -64,16 +56,17 @@ public class Time2 {
     public void setHour(int hour) {
         if (hour < 0 || hour >= 24)
             throw new IllegalArgumentException("hour must be 0-23");
-
-        this.hour = hour;
+        this.secondsSinceMidnight = secondsSinceMidnight / 3600;
     }
 
     // validate and set minute
     public void setMinute(int minute) {
+
         if (minute < 0 || minute >= 60)
             throw new IllegalArgumentException("minute must be 0-59");
 
-        this.minute = minute;
+        this.secondsSinceMidnight = minute * 3600;
+
     }
 
     // validate and set second
@@ -81,21 +74,22 @@ public class Time2 {
         if (second < 0 || second >= 60)
             throw new IllegalArgumentException("second must be 0-59");
 
-        this.second = second;
+        this.secondsSinceMidnight = second * 3600;
+
     }
 
     public int getHour() {
-        return hour;
+        return secondsSinceMidnight / 3600;
     }
 
     // get minute value
     public int getMinute() {
-        return minute;
+        return secondsSinceMidnight % 3600 / 60;
     }
 
     // get second value
     public int getSecond() {
-        return second;
+        return secondsSinceMidnight % 3600 % 60;
     }
 
     // convert to String in universal-time format (HH:MM:SS)
